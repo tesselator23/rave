@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import au.edu.deakin.rave_app.R;
 import au.edu.deakin.rave_app.fragments.FragmentOne;
 import au.edu.deakin.rave_app.fragments.FragmentTwo;
+import au.edu.deakin.rave_app.fragments.FragmentThree;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
+    private FragmentThree fragmentThree;
     private TabLayout allTabs;
 
     @Override
@@ -41,9 +43,11 @@ public class MainActivity extends AppCompatActivity {
     private void setupTabLayout() {
         fragmentOne = new FragmentOne();
         fragmentTwo = new FragmentTwo();
+        fragmentThree = new FragmentThree();
 
-        allTabs.addTab(allTabs.newTab().setText("ONE"),true);
-        allTabs.addTab(allTabs.newTab().setText("TWO"));
+        allTabs.addTab(allTabs.newTab().setText("NEWSFEED"),true);
+        allTabs.addTab(allTabs.newTab().setText("CONTACTS"));
+        allTabs.addTab(allTabs.newTab().setText("UBER"));
     }
 
     private void bindWidgetsWithAnEvent()
@@ -74,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
             case 1 :
                 replaceFragment(fragmentTwo);
                 break;
+            case 2 :
+                replaceFragment(fragmentThree);
+                break;
+
         }
     }
 
