@@ -1,53 +1,88 @@
 package au.edu.deakin.rave_app.fragments;
 
-import android.content.res.TypedArray;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.os.Bundle;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import com.google.android.gms.maps.GoogleMap;
+
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
 
 import au.edu.deakin.rave_app.R;
-import au.edu.deakin.rave_app.activity.MainActivity;
-import au.edu.deakin.rave_app.adapter.ListViewAdapter;
-
-import java.util.ArrayList;
 
 
-/**
- * Created by Mehul on 03-Dec-2015.
- */
-public class FragmentThree extends Fragment
-{
-    private ListView listView;
-    TypedArray allContacts;
-    ArrayList<String> allContactNames = new ArrayList<>();
+public class FragmentThree extends Fragment implements OnMapReadyCallback {
+    private View rootView;
+     MapView mMapView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_three, null);
-        getAllWidgets(rootView);
-        setAdapter();
+    public void onDetach() {
+        super.onDetach();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        try {
+            rootView = inflater.inflate(R.layout.fragment_three, container, false);
+            MapsInitializer.initialize(this.getActivity());
+            mMapView = (MapView) rootView.findViewById(R.id.map);
+            mMapView.onCreate(savedInstanceState);
+            mMapView.getMapAsync(this);
+        } catch (InflateException e) {
+
+        }
         return rootView;
     }
 
-    private void getAllWidgets(View view) {
-        listView = (ListView) view.findViewById(R.id.listFragmentThree);
-
-        allContacts = getResources().obtainTypedArray(R.array.all_contacts);
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
     }
 
-    private void setAdapter()
-    {
-        for (int i = 0; i < allContacts.length(); i++) {
-            allContactNames.add(allContacts.getString(i));
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mMapView.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        {
+//todo
         }
 
-        ListViewAdapter listViewAdapter= new ListViewAdapter(MainActivity.getInstance(), allContactNames);
-        listView.setAdapter(listViewAdapter);
     }
 }

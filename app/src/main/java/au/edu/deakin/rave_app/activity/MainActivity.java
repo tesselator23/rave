@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+
 import au.edu.deakin.rave_app.R;
 import au.edu.deakin.rave_app.fragments.FragmentOne;
 import au.edu.deakin.rave_app.fragments.FragmentTwo;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
-    private FragmentThree fragmentThree;
+    private Fragment fragmentThree;
     private TabLayout allTabs;
 
     @Override
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         getAllWidgets();
         bindWidgetsWithAnEvent();
         setupTabLayout();
-    }
+            }
 
     public static MainActivity getInstance() {
         return instance;

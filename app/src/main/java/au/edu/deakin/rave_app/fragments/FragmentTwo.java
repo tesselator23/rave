@@ -15,9 +15,6 @@ import au.edu.deakin.rave_app.adapter.ListViewAdapter;
 import java.util.ArrayList;
 
 
-/**
- * Created by Mehul on 03-Dec-2015.
- */
 public class FragmentTwo extends Fragment
 {
     private ListView listView;

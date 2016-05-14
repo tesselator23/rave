@@ -2,7 +2,8 @@
     <string name="app_name">Rave-app</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+    <string name="copy_access_token_to_clipboard">Copy Access Token to Clipboard</string>
+    <string name="clear_access_token">Clear Access Token</string>
     <string-array name="all_images">
         <item>@drawable/image1_a</item>
         <item>@drawable/image1_b</item>
