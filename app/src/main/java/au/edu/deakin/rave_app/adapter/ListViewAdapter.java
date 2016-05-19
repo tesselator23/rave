@@ -5,22 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import au.edu.deakin.rave_app.R;
+import au.edu.deakin.rave_app.model.Contact;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-/**
- * Created by Mehul on 03-Dec-2015.
- */
+
 public class ListViewAdapter extends BaseAdapter {
 
-    private ArrayList<String> allContacts;
+    private List<Contact> allContacts;
     private Context context;
     private LayoutInflater inflater;
 
-    public ListViewAdapter(Context context, ArrayList<String> allContacts) {
+    public ListViewAdapter(Context context, List<Contact> allContacts) {
         inflater = LayoutInflater.from(context);
         this.context = context;
         this.allContacts = allContacts;
@@ -43,27 +45,22 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final ContactHolder holder;
+
         View view = convertView;
         if (view == null) {
             view = inflater.inflate(R.layout.contact_inflater, parent, false);
-            holder = new ContactHolder();
-            assert view != null;
-            holder.tvContactName = (TextView) view.findViewById(R.id.tvContactListName);
-            holder.tvNumber = (TextView) view.findViewById(R.id.tvContactListNumber);
-            view.setTag(holder);
-        } else {
-            holder = (ContactHolder) view.getTag();
         }
+        Contact contact = allContacts.get(position);
 
-        holder.tvContactName.setText(allContacts.get(position));
-        holder.tvNumber.setText((position+1)+"");
+        TextView name = (TextView) view.findViewById(R.id.tvContactListName);
+        name.setText(contact.getFullName());
+
+        int day_of_week = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+
+        ImageView online = (ImageView) view.findViewById(R.id.imgOnline);
+        online.setVisibility(contact.getOnlineDay() == day_of_week ? View.VISIBLE : View.INVISIBLE);
 
         return view;
     }
 }
 
-class ContactHolder {
-    TextView tvContactName;
-    TextView tvNumber;
-}

@@ -24,6 +24,11 @@ public class FragmentThree extends Fragment implements OnMapReadyCallback {
     private View rootView;
      MapView mMapView;
 
+    public static FragmentThree newInstance() {
+        FragmentThree fr = new FragmentThree();
+        return fr;
+    }
+
     @Override
     public void onDetach() {
         super.onDetach();

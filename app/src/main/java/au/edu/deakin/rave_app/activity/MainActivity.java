@@ -1,14 +1,23 @@
 package au.edu.deakin.rave_app.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
+
+import org.androidannotations.annotations.Bean;
 
 import au.edu.deakin.rave_app.R;
+import au.edu.deakin.rave_app.database.SharedPreferencesManager;
 import au.edu.deakin.rave_app.fragments.FragmentOne;
 import au.edu.deakin.rave_app.fragments.FragmentTwo;
 import au.edu.deakin.rave_app.fragments.FragmentThree;
@@ -42,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupTabLayout() {
-        fragmentOne = new FragmentOne();
-        fragmentTwo = new FragmentTwo();
+        fragmentOne = new FragmentOne().newInstance();
+        fragmentTwo = new FragmentTwo().newInstance();
         fragmentThree = new FragmentThree();
 
         allTabs.addTab(allTabs.newTab().setText("NEWSFEED"),true);
@@ -74,13 +83,13 @@ public class MainActivity extends AppCompatActivity {
         switch (tabPosition)
         {
             case 0 :
-                replaceFragment(fragmentOne);
+                replaceFragment(FragmentOne.newInstance());
                 break;
             case 1 :
-                replaceFragment(fragmentTwo);
+                replaceFragment(FragmentTwo.newInstance());
                 break;
             case 2 :
-                replaceFragment(fragmentThree);
+                replaceFragment(FragmentThree.newInstance());
                 break;
 
         }
@@ -92,5 +101,29 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.frame_container, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // Handle item selection
+        /*switch (item.getItemId()) {
+
+        }*/
+        SharedPreferences settings = getSharedPreferences("PREFERENCES", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("USER_TOKEN", "");
+        editor.commit();
+        Intent i = new Intent(this,SignInActivity_.class);
+        startActivity(i);
+        finish();
+        return false;
     }
 }

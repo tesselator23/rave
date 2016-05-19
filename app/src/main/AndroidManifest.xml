@@ -8,17 +8,27 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/rave"
         android:label="Rave"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.MainActivity">
+        </activity>
+        <activity android:name=".activity.LoadScreenActivity_">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".activity.HomeActivity_">
+        </activity>
+        <activity android:name=".activity.SignUpActivity_">
+        </activity>
+        <activity android:name=".activity.SignInActivity_">
+        </activity>
+
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBhrOGM4vHLzwe64H4iZjYpu2omrLYrw8s"/>
     </application>
 
